@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      TODO
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button >
+        <ion-icon name = "more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh) = "doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+ <ion-list #todoList color = "danger" class="content">
+    <ion-item-group *ngFor = "let group of groups">
+      <ion-item-sliding *ngFor = "let session of group.sessions">
+          <button ion-item (click)="getDetail(session)">
+              <h3>{{session.name}}</h3>
+              <p>
+                {{session.date}} &mdash;
+                {{session.time}}
+              </p>
+            </button>
+      </ion-item-sliding>
+    </ion-item-group>   
+</ion-list>
+
+<ion-fab bottom center #fab >
+    <button ion-fab><ion-icon name="calendar"></ion-icon></button>
+  </ion-fab>
+
+  <ion-fab bottom left #fab id = "cax">
+      <button ion-fab><ion-icon name="check"></ion-icon></button>
+    </ion-fab>
+
+    <ion-fab bottom right #fab>
+        <button ion-fab (click) = "add()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab>
+
+      <ion-menu [content] = "cax">
+        <p>hello</p>
+      </ion-menu>
+</ion-content>
+
+
+<ion-nav #cax [root]="rootPage"></ion-nav>

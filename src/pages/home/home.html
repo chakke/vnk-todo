@@ -1,52 +1,270 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      TODO
+<ion-content padding>
+    <ion-title id="title">
+        TODO
     </ion-title>
 
-    <ion-buttons end>
-      <button ion-button >
-        <ion-icon name = "more"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
+    <ion-title id="calendar-filter">
+        <ion-datetime right displayFormat=" MMMM - YYYY" name="date1" [(ngModel)]="info.date_filter" (click)="clearCalendar()" (ionChange)="changeDate($event)"></ion-datetime>
+    </ion-title>
 
-<ion-content padding>
-  <ion-refresher (ionRefresh) = "doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+    <div id="main" style="height: 80%;">
+        <button (click)="showDoneList()" id="doneList"></button>
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
 
- <ion-list #todoList color = "danger" class="content">
-    <ion-item-group *ngFor = "let group of groups">
-      <ion-item-sliding *ngFor = "let session of group.sessions">
-          <button ion-item (click)="getDetail(session)">
-              <h3>{{session.name}}</h3>
-              <p>
-                {{session.date}} &mdash;
-                {{session.time}}
-              </p>
+        <div *ngFor="let category of mCategories">
+            <h3 *ngIf="category.alert">Notthing schedule today</h3>
+            <div>
+                <ion-slides *ngIf="category.showCalendar">
+                    <ion-slide *ngFor="let date of mCalendar" class="slides">
+                        <div (click)="getInfo(date)">
+                            <div [class.clickCalendar]="date.clickCalendar == true">
+                                <h3 class="day">{{date.day}}</h3>
+                                <div [class.clickCalendar1]="date.clickCalendar == true" *ngFor="let dayOfWeek of date.dayOfWeek">
+                                    <h5>{{dayOfWeek.dayOfWeek}}</h5>
+                                </div>
+                            </div>
+
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+            </div>
+        </div>
+
+
+
+        <div *ngFor="let category of mCategories" id="content">
+            <div *ngFor="let item of category.items">
+                <!-- Show default div, date time, can click to show detail -->
+                <div ion-item (click)="showDetail(category,item, mCategories)" id="item" *ngIf="category.showDivClick">
+
+
+                    <div>
+                        <div *ngFor="let icon of icons">
+                            <div class="sign" [class.sign1]="icon.url==category.icon && category.icon == '../assets/icon/icon1.png'"></div>
+                            <div class="sign" [class.sign2]="icon.url==category.icon && category.icon == '../assets/icon/icon2.png'"></div>
+                            <div class="sign" [class.sign3]="icon.url==category.icon && category.icon == '../assets/icon/icon3.png'"></div>
+                            <div class="sign" [class.sign4]="icon.url==category.icon && category.icon == '../assets/icon/icon4.png'"></div>
+                            <div class="sign" [class.sign5]="icon.url==category.icon && category.icon == '../assets/icon/icon5.png'"></div>
+                            <div class="sign" [class.sign6]="icon.url==category.icon && category.icon == '../assets/icon/icon6.png'"></div>
+                        </div>
+                        <img [src]=category.icon />
+                        <span id="name">{{category.name}}</span>
+                        <p class="datetime" id="date" *ngIf="item.showDateTime">{{item.date}}</p>
+                        <p class="datetime" id="time" *ngIf="item.showDateTime">{{item.time}}</p>
+                    </div>
+
+                </div>
+
+                <!-- Show filter  -->
+                <div *ngIf="category.showFilter">
+                    <ion-row>
+                        <ion-col col-2 class="col-left">
+                            <div class="datetime">{{item.time}}</div>
+                        </ion-col>
+
+                        <ion-col col-1 id="icon-sign">
+                            <div *ngFor="let icon of icons">
+                                <div [class.sign1]="icon.url==category.icon && category.icon == '../assets/icon/icon1.png'"></div>
+                                <div [class.sign2]="icon.url==category.icon && category.icon == '../assets/icon/icon2.png'"></div>
+                                <div [class.sign3]="icon.url==category.icon && category.icon == '../assets/icon/icon3.png'"></div>
+                                <div [class.sign4]="icon.url==category.icon && category.icon == '../assets/icon/icon4.png'"></div>
+                                <div [class.sign5]="icon.url==category.icon && category.icon == '../assets/icon/icon5.png'"></div>
+                                <div [class.sign6]="icon.url==category.icon && category.icon == '../assets/icon/icon6.png'"></div>
+                            </div>
+
+                        </ion-col>
+
+                        <ion-col>
+                            <div ion-item (click)="showDetail(category,item, mCategories)" id="item">
+                                <img [src]=category.icon />
+                                <span id="name">{{category.name}}</span>
+
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </div>
+
+                <!-- Show div have checkbox to choose  -->
+                <div ion-item id="itemTicks" *ngIf="category.showDivUnClick">
+                    <div *ngFor="let icon of icons">
+                        <div class="sign" [class.sign1]="icon.url==category.icon && category.icon == '../assets/icon/icon1.png'"></div>
+                        <div class="sign" [class.sign2]="icon.url==category.icon && category.icon == '../assets/icon/icon2.png'"></div>
+                        <div class="sign" [class.sign3]="icon.url==category.icon && category.icon == '../assets/icon/icon3.png'"></div>
+                        <div class="sign" class="sign" [class.sign4]="icon.url==category.icon && category.icon == '../assets/icon/icon4.png'"></div>
+                        <div class="sign" [class.sign5]="icon.url==category.icon && category.icon == '../assets/icon/icon5.png'"></div>
+                        <div class="sign" [class.sign6]="icon.url==category.icon && category.icon == '../assets/icon/icon6.png'"></div>
+                    </div>
+
+                    <img [src]=category.icon />
+                    <span id="name">{{category.name}}</span>
+                    <div class="checkbox" *ngIf="item.showCheckBox">
+                        <!-- <div class="box" (click) = "onClickCategory(category)">
+                  <input type="checkbox" name = "checkbox" class="input-checkbox">
+                  <label></label>
+              </div> -->
+
+                        <label class="container" (click)="onClickCategory(category)">
+                        <input type="checkbox" name = "checkbox" class="input-checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="div-click1" *ngIf="this.mCategories.length == 0">
+            <!-- <ion-fab bottom left #fab>
+                <button ion-fab id="btn-tick" (click)="tickItems()">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+            </ion-fab> -->
+
+            <!-- <ion-fab bottom center #fab>
+                <button ion-fab id="btn-calendar">
+            <ion-icon name="calendar-outline" id= "calendar" ></ion-icon>
+          </button>
+            </ion-fab> -->
+
+            <ion-fab bottom center #fab>
+                <button ion-fab (click)="showMenu()" id="btn-add">
+            <ion-icon name="add"></ion-icon>
+          </button>
+            </ion-fab>
+        </div>
+
+        <div *ngFor="let category of mCategories">
+            <!-- Show 2 fab -->
+            <div *ngIf="category.showDivUnClick">
+                <ion-fab bottom left #fab>
+                    <button ion-fab id="btn-close" (click)="closeTickItems()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+                </ion-fab>
+
+                <ion-fab bottom center #fab>
+                    <button ion-fab id="btn-done" (click)="checkAll()">
+            <ion-icon name="done-all"></ion-icon>
+          </button>
+                </ion-fab>
+            </div>
+
+            <!-- Show 3 fab -->
+            <div *ngIf="category.showDivClick" id="div-click">
+                <ion-fab bottom left #fab>
+                    <button ion-fab id="btn-tick" (click)="tickItems()">
+            <ion-icon name="checkmark"></ion-icon>
+          </button>
+                </ion-fab>
+
+                <ion-fab bottom center #fab>
+                    <button ion-fab id="btn-calendar" (click)="showSchedule(category)">
+              <ion-icon name="ios-calendar-outline"></ion-icon>
             </button>
-      </ion-item-sliding>
-    </ion-item-group>   
-</ion-list>
+                </ion-fab>
 
-<ion-fab bottom center #fab >
-    <button ion-fab><ion-icon name="calendar"></ion-icon></button>
-  </ion-fab>
+                <ion-fab bottom right #fab>
+                    <button ion-fab (click)="showMenu()" id="btn-add">
+              <ion-icon name="add"></ion-icon>
+            </button>
+                </ion-fab>
+            </div>
 
-  <ion-fab bottom left #fab id = "cax">
-      <button ion-fab><ion-icon name="check"></ion-icon></button>
-    </ion-fab>
+            <!-- Show calendar button -->
+            <div *ngIf="category.showFilter" id="div-click">
+                <ion-fab bottom left #fab>
+                    <button ion-fab id="btn-tick">
+                <ion-icon name="checkmark"></ion-icon>
+              </button>
+                </ion-fab>
 
-    <ion-fab bottom right #fab>
-        <button ion-fab (click) = "add()"><ion-icon name="add"></ion-icon></button>
-      </ion-fab>
+                <ion-fab bottom center #fab>
+                    <button ion-fab id="btn-calendar" (click)="backHome(category)">
+                  <ion-icon name="menu"></ion-icon>
+                </button>
+                </ion-fab>
 
-      <ion-menu [content] = "cax">
-        <p>hello</p>
-      </ion-menu>
+                <ion-fab bottom right #fab>
+                    <button ion-fab (click)="showMenu()" id="btn-add">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+                </ion-fab>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
 </ion-content>
 
+<!-- Menu -->
+<ion-menu [content]="content" side="right">
+    <div id="menu-title">
+        NEW TASKS
+    </div>
 
-<ion-nav #cax [root]="rootPage"></ion-nav>
+    <div class="menu-content">
+        <form #addForm="ngForm" action="post">
+            <div>
+                <h5>Icon</h5>
+                <ion-grid>
+                    <ion-row>
+
+                        <ion-col *ngFor="let icon of icons" (click)="onClickIcon(icon)">
+                            <div [class.sign1]="icon.url==info.icon && info.icon == '../assets/icon/icon1.png'"></div>
+                            <div [class.sign2]="icon.url==info.icon && info.icon == '../assets/icon/icon2.png'"></div>
+                            <div [class.sign3]="icon.url==info.icon && info.icon == '../assets/icon/icon3.png'"></div>
+                            <div [class.sign4]="icon.url==info.icon && info.icon == '../assets/icon/icon4.png'"></div>
+                            <div [class.sign5]="icon.url==info.icon && info.icon == '../assets/icon/icon5.png'"></div>
+                            <div [class.sign6]="icon.url==info.icon && info.icon == '../assets/icon/icon6.png'"></div>
+                            <input type="image" [src]="icon.url" name="icon">
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+
+            <div>
+                <h5>Name</h5>
+                <div class="title">
+                    <ion-input placeholder="Title" [(ngModel)]="info.name" type="text" name="name"></ion-input>
+                </div>
+
+                <h5>Description</h5>
+                <div id="area">
+                    <ion-textarea placeholder="description" [(ngModel)]="info.description" name="description"></ion-textarea>
+                </div>
+            </div>
+
+            <div class="date_time">
+                <ion-label>Date</ion-label>
+                <div>
+                    <ion-datetime right displayFormat="DD - MMMM - YYYY" [(ngModel)]="info.date" name="date">myDate</ion-datetime>
+                </div>
+                <ion-icon name="arrow-dropdown" class="arrow"></ion-icon>
+
+            </div>
+
+            <div class="date_time">
+                <ion-label>Time</ion-label>
+                <div>
+                    <ion-datetime right displayFormat="hh : mm A" [(ngModel)]="info.time" name="time">myDate</ion-datetime>
+                    <div>
+                        <ion-icon name="arrow-dropdown" class="arrow"></ion-icon>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button ion-button (click)="addNewTask(addForm)" type="submit" id="submit">Add</button>
+        </form>
+    </div>
+
+
+</ion-menu>
+<ion-nav #content [root]="rootPage"></ion-nav>

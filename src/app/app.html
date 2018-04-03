@@ -1,1 +1,68 @@
-<ion-nav [root]="rootPage"></ion-nav>
+
+<!-- <ion-menu [content]="content" side="right" class = "menu-content">
+    <ion-header>
+      <ion-title left>New Task</ion-title>
+    </ion-header>
+
+    <ion-content class = "menu-content">
+      <div>
+        <h4>Icon</h4>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <img (click)="chooseImg($event)" src="../assets/icon/icon1.png" alt="">
+            </ion-col>
+
+            <ion-col>
+              <img (click)="chooseImg($event)" src="../assets/icon/icon2.png" alt="">
+            </ion-col>
+
+            <ion-col>
+              <img (click)="chooseImg($event)" src="../assets/icon/icon3.png" alt="">
+            </ion-col>
+
+            <ion-col>
+              <img (click)="chooseImg($event)" src="../assets/icon/icon4.png" alt="">
+            </ion-col>
+
+            <ion-col>
+              <img (click)="chooseImg($event)" src="../assets/icon/icon5.png" alt="">
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <form #addForm="ngForm" action="post">
+        <div>
+          <h5>Name</h5>
+          <div>
+            <ion-input placeholder="Title" type="text" name="name"></ion-input>
+          </div>
+
+          <h5>Description</h5>
+          <div id="area">
+            <ion-textarea placeholder="description" name="description"></ion-textarea>
+          </div>
+        </div>
+
+        <div>
+          <ion-label>Date</ion-label>
+          <ion-item>
+            <ion-datetime right displayFormat="DD - MMMM - YYYY" name="date">myDate</ion-datetime>
+          </ion-item>
+        </div>
+
+        <div>
+          <ion-label>Time</ion-label>
+          <ion-item>
+            <ion-datetime right displayFormat="hh : mm A"   name="time">myDate</ion-datetime>
+          </ion-item>
+        </div>
+
+
+        <button ion-button (click)="addNewTask(addForm)" type="submit" id = "submit">Add</button>
+      </form>
+    </ion-content>
+  </ion-menu> -->
+
+<ion-nav [root]="rootPage" #content></ion-nav>

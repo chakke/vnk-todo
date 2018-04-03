@@ -1,0 +1,21 @@
+<ion-content>
+    <div class="container">
+        <div id="backdrop" (click)="onClickDismiss()"></div>
+        <ion-card class="info-container">
+            <div id="header">
+                <div padding text-center id="name"><input type="image" [src]="mCategory.icon" name="icon"></div>
+                <div padding text-center id="name">{{mCategory.name}}</div>
+                <div padding text-center id="date-time">
+                    <span id="date">{{mSession.date}}</span>
+                    <span id="time">{{mSession.time}}</span>
+                </div>
+            </div>
+
+            <div padding text-center id="description-title">Description</div>
+            <div padding text-center id="description">{{mCategory.description}}</div>
+            <div padding text-center>
+                <button id="done-btn" (click)="addToDoneList()">Done</button>
+            </div>
+        </ion-card>
+    </div>
+</ion-content>

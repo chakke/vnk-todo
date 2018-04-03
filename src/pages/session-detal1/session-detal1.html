@@ -7,7 +7,7 @@
 <ion-header>
   
     <ion-navbar>
-      <ion-title *ngIf = "session">{{session.name}}</ion-title>
+      <ion-title *ngIf = "category">{{category.name}}</ion-title>
     </ion-navbar>
   
   </ion-header>
@@ -15,7 +15,8 @@
   
   <ion-content padding>
     <div class="content">
-        <h3 *ngIf = "session">{{session.description}}</h3>
+        <h3 *ngIf = "category">{{category.description}}</h3>
+        <!-- <h3 *ngIf = "category">{{session.time}} - {{session.date}}</h3> -->
     </div>
     
   </ion-content>

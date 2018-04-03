@@ -1,6 +1,313 @@
 page-home {
-
-    #cax{
-        margin-left: 10px;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: Baloo;
+    }
+    #title {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+    #calendar-filter {
+        // position: absolute;
+        // top: 0;
+        text-align: center;
+        width: 100%;
+        display: none;
+        margin-top: -10px;
+        // padding-top: 10px;
+    }
+    ion-menu {
+        z-index: 300;
+    }
+    #main {
+        height: 90%;
+        overflow: auto;
+    }
+    .scroll-content {
+        background-image: url("../assets/icon/backround.png") !important;
+        background-position: center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+    }
+    #area {
+        border: 1px solid gray;
+        border-radius: 8px;
+        // height: 50%;
+        background: white;
+        height: 100px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #item {
+        // box-shadow: 0px 0px 1px -1px;
+        border-radius: 7px;
+        opacity: 1;
+        transition: opacity 3s;
+        position: relative;
+    }
+    #itemTicks {
+        transition: opacity 3s;
+        position: relative;
+    }
+    #date {
+        position: absolute;
+        right: 10px;
+        bottom: 24px;
+        color: black;
+        // font-weight: bold;
+    }
+    #time {
+        position: absolute;
+        right: 10px;
+        bottom: 7px;
+        font-size: 10px;
+    }
+    .date_time {
+        position: relative;
+    }
+    .arrow {
+        position: absolute;
+        bottom: 12px;
+        left: 300px;
+    }
+    .checkbox {
+        float: right;
+        // top: 77px;
+    }
+    // Slide
+    ion-slide {
+        width: 68px!important;
+    }
+    //CheckBOx
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    /* Hide the browser's default checkbox */
+    .container input {
+        // position: absolute;
+        float: right;
+        opacity: 0;
+        cursor: pointer;
+    }
+    /* Create a custom checkbox */
+    .checkmark {
+        // position: absolute;
+        // top: 0;
+        // left: 0;
+        float: right;
+        height: 27px;
+        width: 27px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 7px;
+    }
+    /* On mouse-over, add a grey background color */
+    // .container:hover input ~ .checkmark {
+    //     background-color: #ccc;
+    // }
+    /* When the checkbox is checked, add a blue background */
+    // .container input:checked ~ .checkmark {
+    //     background-color: #2196F3;
+    // }
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        // float: right;
+        display: none;
+    }
+    /* Show the checkmark when checked */
+    .container input:checked~.checkmark:after {
+        display: block;
+    }
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 45px;
+        top: 4px;
+        // float: right;
+        width: 5px;
+        height: 11px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        border-right-color: #254DDE;
+        border-bottom-color: #FE1E9A;
+        border-radius: 2px;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    #icon-sign {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sign {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        opacity: 0.5;
+    }
+    .sign1 {
+        width: 8px;
+        height: 8px;
+        border-radius: 30px;
+        background: linear-gradient(to top right, #FEA64C, #FE1E9A);
+    }
+    .sign2 {
+        width: 8px;
+        height: 8px;
+        border-radius: 30px;
+        background: linear-gradient(to top right, #254DDE, #FE1E9A);
+    }
+    .sign3 {
+        width: 8px;
+        height: 8px;
+        border-radius: 30px;
+        background: linear-gradient(to top right, #181743, #254DDE);
+    }
+    .sign4 {
+        width: 8px;
+        height: 8px;
+        border-radius: 30px;
+        background: linear-gradient(to top right, #00FFFF, #254DDE);
+    }
+    .sign5 {
+        width: 8px;
+        height: 8px;
+        border-radius: 30px;
+        background: linear-gradient(to top right, #254DDE, #FE1E9A);
+    }
+    .sign6 {
+        width: 8px;
+        height: 8px;
+        border-radius: 30px;
+        background: linear-gradient(to top right, #88889F, #181743);
+    }
+    //
+    span#name {
+        position: absolute;
+        top: 17px;
+        left: 60px;
+        opacity: 1;
+    }
+    div#content {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .alert-title {
+        font-size: 40px !important;
+    }
+    .alert-button {
+        background: red !important;
+    }
+    button#submit {
+        padding: 11px 51px 14px 52px;
+        border-radius: 20px;
+        margin-top: 65px;
+    }
+    #btn-tick {
+        margin-left: 60px;
+        background: linear-gradient(to bottom left, #FE1E9A, #254DDE);
+    }
+    #btn-add {
+        margin-right: 60px;
+        background: linear-gradient(to bottom left, #00FFFF, #254DDE)
+    }
+    #btn-calendar {
+        background: white;
+        // background-image: url("../assets/icon/calendar.png"); // color: black;
+        // background-position: center;
+        // background-size: cover;
+        // background-repeat: no-repeat;
+    }
+    #btn-calendar>span {
+        color: #FEA64C;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    #btn-close {
+        margin-left: 109px;
+        background: linear-gradient(to bottom left, #181743, #88889F);
+    }
+    #btn-done {
+        margin-left: 30px;
+        background: linear-gradient(to bottom left, #FE1E9A, #254DDE);
+    }
+    .fab ion-icon {
+        font-size: 2.9rem;
+    }
+    .menu-inner {
+        background: linear-gradient(to bottom, white, #CAEBFE) !important;
+        border-radius: 10px 0px 0px 10px;
+        width: 82%;
+    }
+    h5,
+    ion-label {
+        color: #88889F;
+    }
+    #submit {
+        background: linear-gradient(to left, #00FFFF, #254DDE);
+    }
+    .menu-content {
+        // background: #CAEBFE !important;
+        padding: 15px;
+    }
+    #menu-title {
+        padding: 15px;
+        font-size: 20px;
+    }
+    #doneList {
+        background-image: url("../assets/icon/menu.png") !important;
+        background-position: center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        width: 23px;
+        height: 15px;
+        background: transparent;
+        position: absolute;
+        top: 14px;
+        right: 16px;
+    }
+    .col-left {
+        display: flex;
+        align-items: center;
+    }
+    ion-slides {
+        // margin-top: 20px;
+        height: 100px !important;
+    }
+    .clickCalendar {
+        // border: 1px solid red;
+        background: linear-gradient(to top right, #254DDE, #00FFFF);
+        border-radius: 10px;
+        padding: 7px;
+        margin-top: -13px;
+        color: white;
+    }
+    .clickCalendar1 {
+        color: white;
+    }
+    .item-ios.item-block .item-inner {
+        border-bottom: none;
+    }
+    // .item-cover {
+    //     background: linear-gradient(to bottom, white, #CAEBFE);
+    // }
+    .title:hover,
+    .date_time:hover {
+        border-bottom: 1px solid gray;
     }
 }

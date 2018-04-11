@@ -1,4 +1,9 @@
-<ion-content padding>
+<ion-header></ion-header>
+
+<ion-content padding id="abc">
+
+
+
     <ion-title id="title">
         TODO
     </ion-title>
@@ -14,7 +19,7 @@
         </ion-refresher>
 
         <div *ngFor="let category of mCategories">
-            <h3 *ngIf="category.alert">Notthing schedule today</h3>
+
             <div>
                 <ion-slides *ngIf="category.showCalendar">
                     <ion-slide *ngFor="let date of mCalendar" class="slides">
@@ -36,29 +41,52 @@
 
         <div *ngFor="let category of mCategories" id="content">
             <div *ngFor="let item of category.items">
+
                 <!-- Show default div, date time, can click to show detail -->
                 <div ion-item (click)="showDetail(category,item, mCategories)" id="item" *ngIf="category.showDivClick">
+                    <!-- <div class="item-content"> -->
 
-
-                    <div>
-                        <div *ngFor="let icon of icons">
-                            <div class="sign" [class.sign1]="icon.url==category.icon && category.icon == '../assets/icon/icon1.png'"></div>
-                            <div class="sign" [class.sign2]="icon.url==category.icon && category.icon == '../assets/icon/icon2.png'"></div>
-                            <div class="sign" [class.sign3]="icon.url==category.icon && category.icon == '../assets/icon/icon3.png'"></div>
-                            <div class="sign" [class.sign4]="icon.url==category.icon && category.icon == '../assets/icon/icon4.png'"></div>
-                            <div class="sign" [class.sign5]="icon.url==category.icon && category.icon == '../assets/icon/icon5.png'"></div>
-                            <div class="sign" [class.sign6]="icon.url==category.icon && category.icon == '../assets/icon/icon6.png'"></div>
-                        </div>
-                        <img [src]=category.icon />
-                        <span id="name">{{category.name}}</span>
-                        <p class="datetime" id="date" *ngIf="item.showDateTime">{{item.date}}</p>
-                        <p class="datetime" id="time" *ngIf="item.showDateTime">{{item.time}}</p>
+                    <!-- <div class="left-item-content"> -->
+                    <div *ngFor="let icon of icons">
+                        <div class="sign" [class.sign1]="icon.url==category.icon && category.icon == 'assets/icon/icon1.png'"></div>
+                        <div class="sign" [class.sign2]="icon.url==category.icon && category.icon == 'assets/icon/icon2.png'"></div>
+                        <div class="sign" [class.sign3]="icon.url==category.icon && category.icon == 'assets/icon/icon3.png'"></div>
+                        <div class="sign" [class.sign4]="icon.url==category.icon && category.icon == 'assets/icon/icon4.png'"></div>
+                        <div class="sign" [class.sign5]="icon.url==category.icon && category.icon == 'assets/icon/icon5.png'"></div>
+                        <div class="sign" [class.sign6]="icon.url==category.icon && category.icon == 'assets/icon/icon6.png'"></div>
                     </div>
+                    <img [src]=category.icon />
+                    <span id="name">{{category.name.toString()}}</span>
+                    <!-- </div> -->
+
+
+
+                    <!-- <div> -->
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '01'"> {{ item.date.toString().substring(6,8).concat(' ').concat('Jan') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '02'">{{ item.date.toString().substring(6,8).concat(' ').concat('Feb') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '03'">{{ item.date.toString().substring(6,8).concat(' ').concat('Mar') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '04'">{{ item.date.toString().substring(6,8).concat(' ').concat('Apr') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '05'">{{ item.date.toString().substring(6,8).concat(' ').concat('May') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '06'">{{ item.date.toString().substring(6,8).concat(' ').concat('Jun') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '07'">{{ item.date.toString().substring(6,8).concat(' ').concat('Jul') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '08'">{{ item.date.toString().substring(6,8).concat(' ').concat('Aug') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '09'">{{ item.date.toString().substring(6,8).concat(' ').concat('Sep') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '10'">{{ item.date.toString().substring(6,8).concat(' ').concat('Oct') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '11'">{{ item.date.toString().substring(6,8).concat(' ').concat('Nov') }}</p>
+                    <p class="datetime" id="date" *ngIf="item.showDateTime  && item.date.toString().substring(4,6) == '12'">{{ item.date.toString().substring(6,8).concat(' ').concat('Dec') }}</p>
+
+                    <!-- <p class="datetime" id="date" *ngIf="item.showDateTime">{{ item.date}}</p> -->
+                    <p class="datetime" id="time" *ngIf="item.showDateTime">{{item.time}}</p>
+                    <!-- </div> -->
+
+
+                    <!-- </div> -->
 
                 </div>
 
                 <!-- Show filter  -->
                 <div *ngIf="category.showFilter">
+
                     <ion-row>
                         <ion-col col-2 class="col-left">
                             <div class="datetime">{{item.time}}</div>
@@ -66,12 +94,12 @@
 
                         <ion-col col-1 id="icon-sign">
                             <div *ngFor="let icon of icons">
-                                <div [class.sign1]="icon.url==category.icon && category.icon == '../assets/icon/icon1.png'"></div>
-                                <div [class.sign2]="icon.url==category.icon && category.icon == '../assets/icon/icon2.png'"></div>
-                                <div [class.sign3]="icon.url==category.icon && category.icon == '../assets/icon/icon3.png'"></div>
-                                <div [class.sign4]="icon.url==category.icon && category.icon == '../assets/icon/icon4.png'"></div>
-                                <div [class.sign5]="icon.url==category.icon && category.icon == '../assets/icon/icon5.png'"></div>
-                                <div [class.sign6]="icon.url==category.icon && category.icon == '../assets/icon/icon6.png'"></div>
+                                <div [class.sign1]="icon.url==category.icon && category.icon == 'assets/icon/icon1.png'"></div>
+                                <div [class.sign2]="icon.url==category.icon && category.icon == 'assets/icon/icon2.png'"></div>
+                                <div [class.sign3]="icon.url==category.icon && category.icon == 'assets/icon/icon3.png'"></div>
+                                <div [class.sign4]="icon.url==category.icon && category.icon == 'assets/icon/icon4.png'"></div>
+                                <div [class.sign5]="icon.url==category.icon && category.icon == 'assets/icon/icon5.png'"></div>
+                                <div [class.sign6]="icon.url==category.icon && category.icon == 'assets/icon/icon6.png'"></div>
                             </div>
 
                         </ion-col>
@@ -88,28 +116,32 @@
 
                 <!-- Show div have checkbox to choose  -->
                 <div ion-item id="itemTicks" *ngIf="category.showDivUnClick">
-                    <div *ngFor="let icon of icons">
-                        <div class="sign" [class.sign1]="icon.url==category.icon && category.icon == '../assets/icon/icon1.png'"></div>
-                        <div class="sign" [class.sign2]="icon.url==category.icon && category.icon == '../assets/icon/icon2.png'"></div>
-                        <div class="sign" [class.sign3]="icon.url==category.icon && category.icon == '../assets/icon/icon3.png'"></div>
-                        <div class="sign" class="sign" [class.sign4]="icon.url==category.icon && category.icon == '../assets/icon/icon4.png'"></div>
-                        <div class="sign" [class.sign5]="icon.url==category.icon && category.icon == '../assets/icon/icon5.png'"></div>
-                        <div class="sign" [class.sign6]="icon.url==category.icon && category.icon == '../assets/icon/icon6.png'"></div>
+                    <!-- <div class="item-content"> -->
+
+                    <div class="left-item-content">
+                        <div *ngFor="let icon of icons">
+                            <div class="sign" [class.sign1]="icon.url==category.icon && category.icon == 'assets/icon/icon1.png'"></div>
+                            <div class="sign" [class.sign2]="icon.url==category.icon && category.icon == 'assets/icon/icon2.png'"></div>
+                            <div class="sign" [class.sign3]="icon.url==category.icon && category.icon == 'assets/icon/icon3.png'"></div>
+                            <div class="sign" [class.sign4]="icon.url==category.icon && category.icon == 'assets/icon/icon4.png'"></div>
+                            <div class="sign" [class.sign5]="icon.url==category.icon && category.icon == 'assets/icon/icon5.png'"></div>
+                            <div class="sign" [class.sign6]="icon.url==category.icon && category.icon == 'assets/icon/icon6.png'"></div>
+                        </div>
                     </div>
 
                     <img [src]=category.icon />
-                    <span id="name">{{category.name}}</span>
-                    <div class="checkbox" *ngIf="item.showCheckBox">
-                        <!-- <div class="box" (click) = "onClickCategory(category)">
-                  <input type="checkbox" name = "checkbox" class="input-checkbox">
-                  <label></label>
-              </div> -->
+                    <span id="name" class="name-checkbox">{{category.name}}</span>
 
+                    <div class="checkbox" *ngIf="item.showCheckBox">
                         <label class="container" (click)="onClickCategory(category)">
-                        <input type="checkbox" name = "checkbox" class="input-checkbox">
-                        <span class="checkmark"></span>
-                    </label>
+
+                                    <input type="checkbox" name="checkbox" class="input-checkbox">
+                                    <span class="checkmark"></span>
+
+
+                                </label>
                     </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -168,6 +200,7 @@
                 <ion-fab bottom right #fab>
                     <button ion-fab (click)="showMenu()" id="btn-add">
               <ion-icon name="add"></ion-icon>
+              <!-- <span class="icon-add"></span> -->
             </button>
                 </ion-fab>
             </div>
@@ -204,6 +237,7 @@
 
 <!-- Menu -->
 <ion-menu [content]="content" side="right">
+    <div id="backdrop" (click)="onClickDismiss()"></div>
     <div id="menu-title">
         NEW TASKS
     </div>
@@ -216,12 +250,12 @@
                     <ion-row>
 
                         <ion-col *ngFor="let icon of icons" (click)="onClickIcon(icon)">
-                            <div [class.sign1]="icon.url==info.icon && info.icon == '../assets/icon/icon1.png'"></div>
-                            <div [class.sign2]="icon.url==info.icon && info.icon == '../assets/icon/icon2.png'"></div>
-                            <div [class.sign3]="icon.url==info.icon && info.icon == '../assets/icon/icon3.png'"></div>
-                            <div [class.sign4]="icon.url==info.icon && info.icon == '../assets/icon/icon4.png'"></div>
-                            <div [class.sign5]="icon.url==info.icon && info.icon == '../assets/icon/icon5.png'"></div>
-                            <div [class.sign6]="icon.url==info.icon && info.icon == '../assets/icon/icon6.png'"></div>
+                            <div [class.sign1]="icon.url==info.icon && info.icon == 'assets/icon/icon1.png'"></div>
+                            <div [class.sign2]="icon.url==info.icon && info.icon == 'assets/icon/icon2.png'"></div>
+                            <div [class.sign3]="icon.url==info.icon && info.icon == 'assets/icon/icon3.png'"></div>
+                            <div [class.sign4]="icon.url==info.icon && info.icon == 'assets/icon/icon4.png'"></div>
+                            <div [class.sign5]="icon.url==info.icon && info.icon == 'assets/icon/icon5.png'"></div>
+                            <div [class.sign6]="icon.url==info.icon && info.icon == 'assets/icon/icon6.png'"></div>
                             <input type="image" [src]="icon.url" name="icon">
                         </ion-col>
                     </ion-row>

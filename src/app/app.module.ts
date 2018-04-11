@@ -31,6 +31,10 @@ import { Calendar } from '@ionic-native/calendar';
       platforms: {
         ios: {
           menuType: 'overlay',
+        },
+
+        android: {
+          menuType: 'overlay'
         }
       }
     }),

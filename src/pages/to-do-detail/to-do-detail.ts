@@ -44,13 +44,19 @@ export class ToDoDetailPage {
   public _LoadDoneData(): any {
     this.storage.get("doneCategories").then(val => {
       console.log(val);
+      
       this.onLoadedDoneData(val);
     })
   }
 
   onLoadedDoneData(val) {
-    this.doneCategories = val;
-    console.log("home donecategorites",this.doneCategories);
+    if (val) {
+      this.doneCategories = val;
+      console.log("home donecategorites",this.doneCategories);
+    }else{
+      this.doneCategories = [];
+    }
+    
   }
 
   onClickDismiss(){
@@ -84,6 +90,8 @@ export class ToDoDetailPage {
     this.storage.remove("doneCategories").then(
       () => {
         this.storage.set("doneCategories", this.doneCategories);
+        console.log("done array");
+        
       }
     );
   }

@@ -19,27 +19,27 @@ export class DoneListPage {
   icons = [
     {
       id: 0,
-      url: "../assets/icon/icon1.png"
+      url: "assets/icon/icon1.png"
     },
     {
       id: 1,
-      url: "../assets/icon/icon2.png"
+      url: "assets/icon/icon2.png"
     },
     {
       id: 2,
-      url: "../assets/icon/icon3.png"
+      url: "assets/icon/icon3.png"
     },
     {
       id: 3,
-      url: "../assets/icon/icon4.png"
+      url: "assets/icon/icon4.png"
     },
     {
       id: 4,
-      url: "../assets/icon/icon5.png"
+      url: "assets/icon/icon5.png"
     },
     {
       id: 5,
-      url: "../assets/icon/icon6.png"
+      url: "assets/icon/icon6.png"
     }
 
   ]

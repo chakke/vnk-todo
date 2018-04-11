@@ -6,7 +6,18 @@
                 <div padding text-center id="name"><input type="image" [src]="mCategory.icon" name="icon"></div>
                 <div padding text-center id="name">{{mCategory.name}}</div>
                 <div padding text-center id="date-time">
-                    <span id="date">{{mSession.date}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '01'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Jan')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '02'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Feb')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '03'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Mar')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '04'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Apr')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '05'">{{mSession.date.toString().substring(6,8).concat(' ').concat('May')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '06'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Jun')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '07'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Jul')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '08'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Aug')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '09'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Sep')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '10'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Oct')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '11'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Sep')}}</span>
+                    <span id="date" *ngIf="mSession.date.toString().substring(4,6) == '12'">{{mSession.date.toString().substring(6,8).concat(' ').concat('Dec')}}</span>
                     <span id="time">{{mSession.time}}</span>
                 </div>
             </div>

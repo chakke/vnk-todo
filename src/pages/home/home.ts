@@ -72,6 +72,10 @@ export class Category extends AbstractObject {
   description: string;
   items: Array<Session>;
   icon: any;
+  lol: string;
+  date : string;
+  // time: string;
+  showDateTime = true;
   showDivClick = true;
   showDivUnClick = false;
   showCalendar = false;
@@ -92,7 +96,11 @@ export class Category extends AbstractObject {
     this.name = "";
     this.description = "";
     this.icon = "";
+    this.lol = "";
+    this.date = "";
+    // this.time = ""
     this.items = [];
+    this.showDateTime = true;
     this.showDivClick = true;
     this.showDivUnClick = false;
     this.isChecked = false;
@@ -168,6 +176,9 @@ export class Day extends AbstractObject {
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
+
+
 // @Injectable()
 @Directive({ selector: '[myHighlight]' })
 export class HomePage {
@@ -178,6 +189,7 @@ export class HomePage {
   description: String;
   countClick: number = 0;
   countTicks: number = 0;
+
   data: any;
   info: Detail = { id: 0, name: '', description: '', date: '', time: '', icon: '', date_filter: '' };
   imgPath: String;
@@ -191,30 +203,36 @@ export class HomePage {
   icons = [
     {
       id: 0,
-      url: "../assets/icon/icon1.png"
+      url: "assets/icon/icon1.png"
     },
     {
       id: 1,
-      url: "../assets/icon/icon2.png"
+      url: "assets/icon/icon2.png"
     },
     {
       id: 2,
-      url: "../assets/icon/icon3.png"
+      url: "assets/icon/icon3.png"
     },
     {
       id: 3,
-      url: "../assets/icon/icon4.png"
+      url: "assets/icon/icon4.png"
     },
     {
       id: 4,
-      url: "../assets/icon/icon5.png"
+      url: "assets/icon/icon5.png"
     },
     {
       id: 5,
-      url: "../assets/icon/icon6.png"
+      url: "assets/icon/icon6.png"
     }
 
   ]
+
+  bands : Array<any> = [ 
+    { genre: 'Rap', band: 'Migos', albums: 2},
+    { genre: 'Pop', band: 'Coldplay', albums: 4, awards: 13},
+    { genre: 'Rock', band: 'Breaking Benjamins', albums: 1}
+   ];
 
   constructor(
     private el: ElementRef, private renderer: Renderer,
@@ -231,7 +249,14 @@ export class HomePage {
     public navParams: NavParams,
     public calendar: Calendar
   ) {
+    console.log(this.bands.sort(this.compareValues('albums', 'desc')));
+
+
+    
+    
   }
+
+
 
   onClickDismiss() {
     this.mViewController.dismiss({
@@ -248,6 +273,7 @@ export class HomePage {
 
   addCategory(category: Category) {
     this.mCategories.push(category);
+    this.mCategories.sort(this.compareValues('date', 'asc'))
     this._SaveData();
   }
 
@@ -283,10 +309,20 @@ export class HomePage {
     })
   }
 
+  
+
   onLoadedData(val) {
     this.mCategories = val;
+    /*
+      Filter array
+    */
+    // console.log();
+    this.mCategories.sort(this.compareValues('date', 'asc'));
+
+
     this.mCategories.forEach(category => {
-      category.items.forEach(item => {
+      category.items.forEach(item => {        
+
         item.showCheckBox = false;
         item.showDateTime = true;
         category.showDivClick = true;
@@ -300,6 +336,44 @@ export class HomePage {
       });
     });
   }
+
+  compare(a, b) {
+    // Dùng toUpperCase() để không phân biệt ký tự hoa thường
+    const genreA = a.genre.toUpperCase();
+    const genreB = b.genre.toUpperCase();
+    
+    let comparison = 0;
+    if (genreA > genreB) {
+      comparison = 1;
+    } else if (genreA < genreB) {
+      comparison = -1;
+    }
+    return comparison;
+   }
+
+   compareValues(key, order='asc') {
+    return function(a, b) {
+      if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // không tồn tại tính chất trên cả hai object
+          return 0; 
+      }
+    
+      const varA = (typeof a[key] === 'string') ? 
+        a[key].toUpperCase() : a[key];
+      const varB = (typeof b[key] === 'string') ? 
+        b[key].toUpperCase() : b[key];
+    
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        (order == 'desc') ? (comparison * -1) : comparison
+      );
+    };
+   }
 
   public _LoadDoneData(): any {
     this.storage.get("doneCategories").then(val => {
@@ -355,6 +429,7 @@ export class HomePage {
 
   showMenu() {
     this.menuCtrl.toggle('right');
+    // document.getElementById("abc").style.background = "rgba(0, 0, 0, 0.4) !important";
   }
   // || this.info.description == "" || this.info.date == "" || this.info.time == ""
   // Get info in form add to create new Task
@@ -369,90 +444,50 @@ export class HomePage {
       let category = new Category();
       category.id = "" + (this.mCategories.length + 1);
       category.name = this.info.name;
+      category.date = this.info.date.toString().substring(0,4).concat(this.info.date.toString().substring(5,7)).concat(this.info.date.toString().substring(8,10));
       category.description = this.info.description;
       category.icon = this.info.icon;
 
       let session = new Session();
       session.description = this.info.description;
       session.time = this.info.time;
-      this.formatDate(this.info.date, session);
+      session.date = this.info.date.toString().substring(0,4).concat(this.info.date.toString().substring(5,7)).concat(this.info.date.toString().substring(8,10));
+      
+      // this.formatDate(this.info.date, session);
 
       category.addSession(session);
       this.addCategory(category);
 
-      let complete = this.alertCtrl.create({
-        title: 'Tạo lịch thành công',
-        buttons: [{
-          text: "OK",
-          handler: () => {
-            this.ionViewDidLoad();
-          }
-        }]
+      // let complete = this.alertCtrl.create({
+      //   title: 'Tạo lịch thành công',
+      //   buttons: [{
+      //     text: "OK",
+      //     handler: () => {
+      //       this.ionViewDidLoad();
+      //     }
+      //   }]
+      // });
+      // complete.present();
+
+      let toast = this.toastCtrl.create({
+        message : "Tạo lịch thành công",
+        duration : 3000
       });
-      complete.present();
+
+      toast.dismiss();
+      toast.present();
 
       this.info.name = '';
       this.info.description = "";
       this.info.date = "";
       this.info.time = ""
+
+      this.menuCtrl.close();
     }
+    
+    
 
     // document.getElementById("div-click1").style.display = "none";
-  }
-
-  // format month from number to string  
-  formatDate(category: String, session: Session) {
-    switch (this.info.date.substring(5, 7)) {
-      case "01":
-        session.date = this.info.date.substring(8, 10) + "  " + "Jan";
-        break;
-
-      case "02":
-        session.date = this.info.date.substring(8, 10) + "  " + "Feb";
-        break;
-
-      case "03":
-        session.date = this.info.date.substring(8, 10) + "  " + "Mar";
-        break;
-
-      case "04":
-        session.date = this.info.date.substring(8, 10) + "  " + "Apr";
-        break;
-
-      case "05":
-        session.date = this.info.date.substring(8, 10) + "  " + "May";
-        break;
-
-      case "06":
-        session.date = this.info.date.substring(8, 10) + "  " + "Jun";
-        break;
-
-      case "07":
-        session.date = this.info.date.substring(8, 10) + "  " + "Jul";
-        break;
-
-      case "08":
-        session.date = this.info.date.substring(8, 10) + "  " + "Aug";
-        break;
-
-      case "09":
-        session.date = this.info.date.substring(8, 10) + "  " + "Sep";
-        break;
-
-      case "10":
-        session.date = this.info.date.substring(8, 10) + "  " + "Oct";
-        break;
-
-      case "11":
-        session.date = this.info.date.substring(8, 10) + "  " + "Nov";
-        break;
-
-      case "12":
-        session.date = this.info.date.substring(8, 10) + "  " + "Dec";
-        break;
-      default:
-        break;
-    }
   }
 
   // Get detail 
@@ -601,6 +636,9 @@ export class HomePage {
 
   onClickCategory(category) {
     category.isChecked = true;
+
+    console.log(this.mCategories);
+    
   }
 
   onClickIcon(icon) {
@@ -629,11 +667,20 @@ export class HomePage {
 
   getInfo(date: Day){
     
-    var month = new Date(this.info.date_filter).toDateString().substring(4,7);
-    var dateSelected = date.day.toString().concat("  ").concat(month);
+    console.log(this.info.date_filter);
+    
+    
+    // var month = new Date(this.info.date_filter).toDateString().substring(4,7);
+    var dateSelected = date.day.toString();
     if(date.day < 10){
-      dateSelected = "0" + date.day.toString().concat("  ").concat(month);
+      dateSelected = "0" + date.day.toString();
     }
+    // console.log(dateSelected);
+    dateSelected = this.info.date_filter.toString().substring(0,4)
+        .concat(this.info.date_filter.toString().substring(5,7))
+        .concat(dateSelected);
+    
+    
     this.mCategories.splice(0, this.mCategories.length);
 
     this.storage.get("categories").then(val=>{
@@ -641,12 +688,11 @@ export class HomePage {
         category.items.forEach(item => {
           if(item.date == dateSelected){
             this.mCategories.push(category);
+            console.log(this.mCategories);
           }
         });
         category.showFilter = true;
         category.showDivClick = false;
-        console.log(val);
-        
       });     
     });
     date.clickCalendar = true;

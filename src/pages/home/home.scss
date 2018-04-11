@@ -1,11 +1,18 @@
 page-home {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-        font-family: Baloo;
-    }
+    // * {
+    //     font-family: 'Lato-Black' !important;
+    //     src: url('../assets/fonts/Lato-Black.ttf') format("ttf");
+    //     // src: url('..assets/fonts/icomoon.eot?lh8qon#iefix') format('embedded-opentype'), url('..assets/fonts/icomoon.ttf?lh8qon') format('truetype'), url('..assets/fonts/icomoon.woff?lh8qon') format('woff'), url('..assets/fonts/icomoon.svg?lh8qon#icomoon') format('svg');
+    //     font-weight: normal;
+    //     font-style: normal;
+    // }
+    // h1,
+    // h2,
+    // h3,
+    // h4,
+    // h5 {
+    //     font-family: Baloo;
+    // }
     #title {
         text-align: center;
         font-size: 20px;
@@ -21,8 +28,12 @@ page-home {
         // padding-top: 10px;
     }
     ion-menu {
-        z-index: 300;
+        z-index: 80;
     }
+    // #backdrop {
+    //     background: rgba(0, 0, 0, 0.4) !important;
+    //     z-index: -1;
+    // }
     #main {
         height: 90%;
         overflow: auto;
@@ -46,24 +57,37 @@ page-home {
         // box-shadow: 0px 0px 1px -1px;
         border-radius: 7px;
         opacity: 1;
-        transition: opacity 3s;
         position: relative;
     }
     #itemTicks {
-        transition: opacity 3s;
         position: relative;
+        border-radius: 7px;
+    }
+    .item-content {
+        display: flex;
+        align-items: center;
+        // align-content: flex-end;
+    }
+    .left-item-content {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        overflow: auto;
+        margin-right: 20px;
     }
     #date {
         position: absolute;
-        right: 10px;
+        right: 13px;
         bottom: 24px;
+        font-weight: bold;
         color: black;
         // font-weight: bold;
     }
     #time {
         position: absolute;
-        right: 10px;
+        right: 20px;
         bottom: 7px;
+        text-align: center;
         font-size: 10px;
     }
     .date_time {
@@ -75,6 +99,8 @@ page-home {
         left: 300px;
     }
     .checkbox {
+        // display: flex;
+        // align-items: center;
         float: right;
         // top: 77px;
     }
@@ -201,7 +227,13 @@ page-home {
         position: absolute;
         top: 17px;
         left: 60px;
+        margin-left: 20px;
         opacity: 1;
+        color: black;
+    }
+    span.name-checkbox {
+        position: absolute;
+        bottom: 21px;
     }
     div#content {
         margin-top: 20px;
@@ -216,7 +248,7 @@ page-home {
     button#submit {
         padding: 11px 51px 14px 52px;
         border-radius: 20px;
-        margin-top: 65px;
+        // margin-top: 30px;
     }
     #btn-tick {
         margin-left: 60px;
@@ -310,4 +342,64 @@ page-home {
     .date_time:hover {
         border-bottom: 1px solid gray;
     }
+    // @font-face {
+    //     font-family: 'icomoon';
+    //     src: url('..assets/fonts/icomoon.eot?lh8qon');
+    //     src: url('..assets/fonts/icomoon.eot?lh8qon#iefix') format('embedded-opentype'), url('..assets/fonts/icomoon.ttf?lh8qon') format('truetype'), url('..assets/fonts/icomoon.woff?lh8qon') format('woff'), url('..assets/fonts/icomoon.svg?lh8qon#icomoon') format('svg');
+    //     font-weight: normal;
+    //     font-style: normal;
+    // }
+    // [class^="icon-"],
+    // [class*=" icon-"] {
+    //     /* use !important to prevent issues with browser extensions that change fonts */
+    //     font-family: 'icomoon' !important;
+    //     speak: none;
+    //     font-style: normal;
+    //     font-weight: normal;
+    //     font-variant: normal;
+    //     text-transform: none;
+    //     line-height: 1;
+    //     /* Better Font Rendering =========== */
+    //     -webkit-font-smoothing: antialiased;
+    //     -moz-osx-font-smoothing: grayscale;
+    // }
+    // .icon-add:before {
+    //     content: "\e900";
+    // }
+    // .icon-ball:before {
+    //     content: "\e901";
+    // }
+    // .icon-calendar:before {
+    //     content: "\e902";
+    // }
+    // .icon-clear:before {
+    //     content: "\e903";
+    // }
+    // .icon-confirm:before {
+    //     content: "\e904";
+    // }
+    // .icon-dumbell:before {
+    //     content: "\e905";
+    // }
+    // .icon-glass:before {
+    //     content: "\e906";
+    // }
+    // .icon-location:before {
+    //     content: "\e907";
+    // }
+    // .icon-menu_1:before {
+    //     content: "\e908";
+    // }
+    // .icon-menu_2:before {
+    //     content: "\e909";
+    // }
+    // .icon-more:before {
+    //     content: "\e90a";
+    // }
+    // .icon-shopping:before {
+    //     content: "\e90b";
+    // }
+    // .icon-tick:before {
+    //     content: "\e90c";
+    // }
 }
